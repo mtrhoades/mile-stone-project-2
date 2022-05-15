@@ -12,6 +12,10 @@ const PORT = process.env.PORT; // make variable for the PORT # in the .env file
 // MIDDLEWARE
 app.use(cors()); // uses cors for all API requests between requests and responses.
 app.use(express.json()); // retrieves data through express in JSON format between requests and responses.
+app.set('views', __dirname + '/views'); // used to show files from views folder (all the jsx)
+app.set('view engine', 'jsx'); // setting the view engine in JSX.
+app.engine('jsx', require('express-react-views').createEngine()); // ^ pulling from REACT 
+
 
 
 // ROOT ROUTE
@@ -21,8 +25,8 @@ app.get('/', (req, res) => { // intial stub route for intro page.
 
 
 // CONTROLLER ROUTE
-const stockPortfolioController = require('./controllers/stock_portfolio_controller'); // route for controller to use all CRUD operations.
-app.use('/stockportfolio', stockPortfolioController);
+const stocksController = require('./controllers/stock_portfolio_controller'); // route for controller to use all CRUD operations.
+app.use('/stocks', stocksController);
 
 
 // SERVER LISTENER
